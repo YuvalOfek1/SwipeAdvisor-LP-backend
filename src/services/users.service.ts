@@ -1,4 +1,5 @@
 import UserEmails from "../models/User.model"
+import { ConflictError } from "../errors/ConflictError"
 
 type CreateUserRequest = {
     email: string;
@@ -7,7 +8,7 @@ type CreateUserRequest = {
 const createUser = async ( { email }: CreateUserRequest) => {
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
-        throw new Error('User with this email already exists');
+        throw new ConflictError('User with this email already exists');
     } 
     
     const newUser = new UserEmails({ email });

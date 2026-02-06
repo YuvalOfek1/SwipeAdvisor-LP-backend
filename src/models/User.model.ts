@@ -1,14 +1,14 @@
 import mongoose, { Schema } from "mongoose"
-export type IUser = {
+export type IUserEmail = {
     id: Schema.Types.ObjectId;
     email: string;
 }
-const UserSchema = new Schema<IUser>({
+const UserEmailSchema = new Schema<IUserEmail>({
         email: { type: String,required: true, unique: true},
     },
-    { timestamps: true }
+    { timestamps: true, collection: 'userEmails' }
 );
 
-const User =  mongoose.model<IUser>('User', UserSchema);
+const UserEmails =  mongoose.model<IUserEmail>('UserEmails', UserEmailSchema);
 
-export default User;
+export default UserEmails;
